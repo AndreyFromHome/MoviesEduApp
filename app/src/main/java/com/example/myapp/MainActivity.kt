@@ -13,13 +13,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("MyLog", "in onCreate")
+        val name = "Liliana"
+        Log.d("MyLog", "Здесь была $name")
 
         val registerButton = findViewById<Button>(R.id.main_activity_register_button) // Инициализировали объект кнопки
         val mainActivityLoginText = findViewById<TextView>(R.id.main_activity_login_text) // Указали объект кнопки на элемент внутри XML
 
         // Прикрепили обработчик нажатия к кнопке
         registerButton.setOnClickListener {
+            Log.d("MyLog", "CLick")
             Toast.makeText(this@MainActivity, "Go to Registration", Toast.LENGTH_SHORT).show()
             val intentToRegisterScreen = Intent(this, RegistrationActivity::class.java) // intent.putExtra("key", value)
             startActivity(intentToRegisterScreen)
@@ -34,4 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 }
