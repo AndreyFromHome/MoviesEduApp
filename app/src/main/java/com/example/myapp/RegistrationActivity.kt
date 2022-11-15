@@ -15,13 +15,13 @@ class RegistrationActivity : AppCompatActivity() {
 
     // See: https://developer.android.com/training/basics/intents/result
     // Наше RegistrationActivity будет пер сылаться на активити, которое нам предоставляет Firebase
-    private val signInLauncher = registerForActivityResult( // инициализируем
+    private val signInLauncher = registerForActivityResult( // инициализируем (создаём) объект авторизации
         FirebaseAuthUIActivityResultContract()
     ) { res ->
-        this.onSignInResult(res)
+        this.onSignInResult(res) // запуск самого экрана
     }
 
-    private lateinit var database: DatabaseReference
+    private lateinit var database: DatabaseReference // создали объект для записи в БД
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,31 +29,34 @@ class RegistrationActivity : AppCompatActivity() {
 
         // Choose authentication providers
         Log.d("MyLog", "RegistrationActivity start registration")
+        database = Firebase.database.reference // инициализация базы данных
 
-        database = Firebase.database.reference
         val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build()
+            AuthUI.IdpConfig.EmailBuilder().build() // создаём регистраций (только емейл)
         )
         // Create and launch sign-in intent
-        // Создание интента с использованием билдера, который будет строить интент из библиотеку Firebase
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
-            .build()
-        signInLauncher.launch(signInIntent) // запускаем
+            .build() // создали intent для экрана firebase auth
+        signInLauncher.launch(signInIntent) // запускаем экран firebase auth
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        val response = result.idpResponse
+        val response = result.idpResponse // результат с экрана Firebase auth
         if (result.resultCode == RESULT_OK) {
             Log.d("MyLog", "RegistrationActivity registration success ${response?.email}")
 
             // Successfully signed in
-            val authUser = FirebaseAuth.getInstance().currentUser
+            val authUser = FirebaseAuth.getInstance().currentUser // создаём объект текущего пользователя Firebase auth
             // Если authUser не является null, то выполняется всё внутри let {}
-            authUser?.let {
-                val fireBaseUser = User(it.email.toString(), it.uid) // создаём юзера с полученными данными
-                database.child("users").setValue(fireBaseUser) // заполняем БД "users"
+            authUser?.let { // если объект существует, сохраняем его в БД
+                val email = it.email.toString()
+                val uid = it.uid
+                val fireBaseUser = User(email, uid) // создаём новый объект юзер с полученными параметрами
+                Log.d("MyLog", "RegistrationActivity registration success $response")
+                database.child("users").child(uid).setValue(fireBaseUser) // заполняем/сохраняем пользователя в Firebase realtime
+                onBackPressed() // пересылают юзера на экран, с которого он пришёл
             }
 
         } else {
