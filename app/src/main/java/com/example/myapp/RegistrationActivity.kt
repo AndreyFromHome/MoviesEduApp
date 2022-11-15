@@ -8,6 +8,8 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class RegistrationActivity : AppCompatActivity() {
 
@@ -27,10 +29,11 @@ class RegistrationActivity : AppCompatActivity() {
 
         // Choose authentication providers
         Log.d("MyLog", "RegistrationActivity start registration")
+
+        database = Firebase.database.reference
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
-
         // Create and launch sign-in intent
         // Создание интента с использованием билдера, который будет строить интент из библиотеку Firebase
         val signInIntent = AuthUI.getInstance()
@@ -47,12 +50,10 @@ class RegistrationActivity : AppCompatActivity() {
 
             // Successfully signed in
             val authUser = FirebaseAuth.getInstance().currentUser
-
             // Если authUser не является null, то выполняется всё внутри let {}
             authUser?.let {
-                User(it.email.toString(), it.uid) // создаём юзера с полученными данными
-
-                database.child("users").child(userId).setValue(user)
+                val fireBaseUser = User(it.email.toString(), it.uid) // создаём юзера с полученными данными
+                database.child("users").setValue(fireBaseUser) // заполняем БД "users"
             }
 
         } else {
