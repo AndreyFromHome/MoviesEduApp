@@ -7,6 +7,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 
 class RegistrationActivity : AppCompatActivity() {
 
@@ -17,6 +18,8 @@ class RegistrationActivity : AppCompatActivity() {
     ) { res ->
         this.onSignInResult(res)
     }
+
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +44,17 @@ class RegistrationActivity : AppCompatActivity() {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
             Log.d("MyLog", "RegistrationActivity registration success ${response?.email}")
+
             // Successfully signed in
-            val user = FirebaseAuth.getInstance().currentUser
-            // ...
+            val authUser = FirebaseAuth.getInstance().currentUser
+
+            // Если authUser не является null, то выполняется всё внутри let {}
+            authUser?.let {
+                User(it.email.toString(), it.uid) // создаём юзера с полученными данными
+
+                database.child("users").child(userId).setValue(user)
+            }
+
         } else {
             Log.d("MyLog", "RegistrationActivity registration failure")
             // Sign in failed. If response is null the user canceled the
