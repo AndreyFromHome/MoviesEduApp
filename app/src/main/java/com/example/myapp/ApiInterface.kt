@@ -1,18 +1,17 @@
 package com.example.myapp
 
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface ApiInterface {
 
-    @GET("api/users/2")
-    fun getMovies() : Call<TestingDataClass>
+    @GET("api/characters?limit=10&offset=10")
+    fun getMovies() : retrofit2.Call<MoviesItem>
 
     companion object {
 
-        var BASE_URL = "https://reqres.in/"
+        var BASE_URL = "https://breakingbadapi.com/"
 
         fun create() : ApiInterface {
 

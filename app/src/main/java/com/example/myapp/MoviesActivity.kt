@@ -30,22 +30,23 @@ class MoviesActivity : AppCompatActivity() {
             data.add(ItemsViewModel(com.google.android.gms.auth.api.R.drawable.common_full_open_on_phone, "Item " + i))
         }
 
-        // This will pass the ArrayList to our Adapter
-        val adapter = CustomAdapter(data)
-
-        // Setting the Adapter with the recyclerview
-        recyclerview.adapter = adapter
-
         val apiInterface = ApiInterface.create().getMovies()
 
         //apiInterface.enqueue( Callback<List<Movie>>())
-        apiInterface.enqueue( object : Callback<TestingDataClass> {
-            override fun onResponse(call: Call<TestingDataClass>?, response: Response<TestingDataClass>?) {
-                Log.d("MyLog", "OnResponse success ${response?.body()?.data?.first_name} ")
+        apiInterface.enqueue( object : Callback<MoviesItem> {
+            override fun onResponse(call: Call<MoviesItem>?, response: Response<MoviesItem>?) {
+
+            //    val data = ArrayList<MoviesItem>()
+                Log.d("MyLog", "OnResponse success ${response?.body()?.status} ")
+                // This will pass the ArrayList to our Adapter
+                val adapter = CustomAdapter(response?.body().)
+
+                // Setting the Adapter with the recyclerview
+                recyclerview.adapter = adapter
 
             }
 
-            override fun onFailure(call: Call<TestingDataClass>?, t: Throwable?) {
+            override fun onFailure(call: Call<MoviesItem>?, t: Throwable?) {
                 Log.d("MyLog", "OnFailure ${t?.message} ")
             }
         })
