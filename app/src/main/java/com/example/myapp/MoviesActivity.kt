@@ -1,14 +1,17 @@
 package com.example.myapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class MoviesActivity : AppCompatActivity() {
 
@@ -33,12 +36,12 @@ class MoviesActivity : AppCompatActivity() {
 
         val apiInterface = ApiInterface.create().getMovies()
 
-        apiInterface.enqueue( object : Callback<List<MoviesItem>> {
+        apiInterface.enqueue( object : Callback<List<MoviesItem>>, CustomAdapter.ItemClickListener {
             override fun onResponse(call: Call<List<MoviesItem>>, response: Response<List<MoviesItem>>) {
 
                 Log.d("MyLog", "OnResponse success ${response?.body()} ")
                 // This will pass the ArrayList to our Adapter
-                val adapter = CustomAdapter(response?.body())
+                val adapter = CustomAdapter(response?.body(), this)
 
                 // Setting the Adapter with the recyclerview
                 recyclerview.adapter = adapter
@@ -49,9 +52,18 @@ class MoviesActivity : AppCompatActivity() {
                 Log.d("MyLog", "OnFailure ${t?.message} ")
             }
 
+            override fun onItemClick(position: Int) {
+                Toast.makeText(this@MoviesActivity, "click $position", Toast.LENGTH_SHORT).show()
+                try {
+                    val notify: Uri =
+                        RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                    val r = RingtoneManager.getRingtone(applicationContext, notify)
+                    r.play()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         })
-
-
    }
 
     override fun onBackPressed() {

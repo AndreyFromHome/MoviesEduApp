@@ -9,8 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class CustomAdapter(private val mList: List<MoviesItem>?) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+// В адаптере связываем список данных с героями сериала с нашего API и размещаем его в элементе Android Recycler View
+class CustomAdapter(private val mList: List<MoviesItem>?,
+                    val mItemClickListener:ItemClickListener) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+
+    interface ItemClickListener {
+        fun onItemClick(position: Int)
+    }
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,8 +42,13 @@ class CustomAdapter(private val mList: List<MoviesItem>?) :
     }
 
     // Holds the views for adding it to image and text
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+    inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageview)
+        init {
+            ItemView.setOnClickListener {
+                mItemClickListener.onItemClick(adapterPosition)
+            }
+        }
         //    val textView: TextView = itemView.findViewById(R.id.textView)
     }
 }
