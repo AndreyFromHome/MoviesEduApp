@@ -30,10 +30,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val intent = Intent(this@MainActivity, MoviesActivity::class.java)
+        startActivity(intent)
 
         // Choose authentication providers
         Log.d("MyLog", "RegistrationActivity start registration")
-        database = Firebase.database.reference // инициализация базы данных
+      /*  database = Firebase.database.reference // инициализация базы данных
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build() // создаём спсиок регистраций (только емейл)
         )
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
             .build() // создали intent для экрана firebase auth
-        signInLauncher.launch(signInIntent) // запускаем экран firebase auth
+        signInLauncher.launch(signInIntent) // запускаем экран firebase auth*/
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {

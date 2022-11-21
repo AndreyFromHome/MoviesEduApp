@@ -3,6 +3,7 @@ package com.example.myapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
@@ -19,7 +20,7 @@ class MoviesActivity : AppCompatActivity() {
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerview)
 
         // this creates a vertical layout Manager
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.layoutManager = GridLayoutManager(this,2)
 
         // ArrayList of class ItemsViewModel
         val data = ArrayList<ItemsViewModel>()
@@ -32,23 +33,22 @@ class MoviesActivity : AppCompatActivity() {
 
         val apiInterface = ApiInterface.create().getMovies()
 
-        //apiInterface.enqueue( Callback<List<Movie>>())
-        apiInterface.enqueue( object : Callback<MoviesItem> {
-            override fun onResponse(call: Call<MoviesItem>?, response: Response<MoviesItem>?) {
+        apiInterface.enqueue( object : Callback<List<MoviesItem>> {
+            override fun onResponse(call: Call<List<MoviesItem>>, response: Response<List<MoviesItem>>) {
 
-            //    val data = ArrayList<MoviesItem>()
-                Log.d("MyLog", "OnResponse success ${response?.body()?.status} ")
+                Log.d("MyLog", "OnResponse success ${response?.body()} ")
                 // This will pass the ArrayList to our Adapter
-                val adapter = CustomAdapter(response?.body().)
+                val adapter = CustomAdapter(response?.body())
 
                 // Setting the Adapter with the recyclerview
                 recyclerview.adapter = adapter
 
             }
 
-            override fun onFailure(call: Call<MoviesItem>?, t: Throwable?) {
+            override fun onFailure(call: Call<List<MoviesItem>>?, t: Throwable?) {
                 Log.d("MyLog", "OnFailure ${t?.message} ")
             }
+
         })
 
 

@@ -6,8 +6,8 @@ import retrofit2.http.GET
 
 interface ApiInterface {
 
-    @GET("api/characters?limit=10&offset=10")
-    fun getMovies() : retrofit2.Call<MoviesItem>
+    @GET("api/characters?limit=10&offset=0")
+    fun getMovies() : retrofit2.Call<List<MoviesItem>>
 
     companion object {
 
