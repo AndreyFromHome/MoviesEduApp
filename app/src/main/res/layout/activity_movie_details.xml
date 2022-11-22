@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:textSize="24sp"
         android:id="@+id/movies_details_title"
-        android:text="Name of the movie"
+        android:text="Name"
         />
 
     <androidx.cardview.widget.CardView
@@ -27,11 +27,12 @@
 
         <ImageView
         android:id="@+id/movie_details_image_banner"
-            android:layout_width="525dp"
-            android:layout_height="300dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movies_details_title"
+            android:layout_margin="10dp"
             />
     </androidx.cardview.widget.CardView>
 
@@ -65,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="Release date: "
+            android:text="Birth date: "
             android:textStyle="bold"
             android:layout_marginBottom="4dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="23 June 2001"
+            android:text="waiting..."
             android:layout_marginBottom="4dp"
             app:layout_constraintStart_toEndOf="@+id/movie_details_body_date_label"
             app:layout_constraintTop_toBottomOf="@+id/movie_details_body_overview_label"
@@ -88,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="Score: "
+            android:text="Status: "
             android:textStyle="bold"
             android:layout_marginBottom="4dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="7.9"
+            android:text="waiting..."
             android:layout_marginBottom="4dp"
             app:layout_constraintStart_toEndOf="@+id/movie_details_score_label"
             app:layout_constraintTop_toBottomOf="@+id/movie_details_body_date_label"
@@ -111,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="OverviewOverviewOverviewOverviewOverviewOverviewOverviewOverviewOverviewOverviewOverviewOverviewOverviewOverviewOverview"
+            android:text="waiting..."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_details_score_label"
             />
