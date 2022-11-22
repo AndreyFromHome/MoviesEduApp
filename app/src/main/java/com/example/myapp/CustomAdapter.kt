@@ -46,7 +46,10 @@ class CustomAdapter(private val mList: List<MoviesItem>?,
         val imageView: ImageView = itemView.findViewById(R.id.imageview)
         init {
             ItemView.setOnClickListener {
-                mItemClickListener.onItemClick(adapterPosition)
+            //    mItemClickListener.onItemClick(adapterPosition)
+            // если mList не null, берём позицию на которую кликаем и берём там значение char_id, если здесь везде не null, вызываем let { ... }
+                // в котором вызываем функцию onItemClick(it) в объекте ItemClickListener
+            mList?.get(position)?.char_id?.let { it -> mItemClickListener.onItemClick(it)}
             }
         }
         //    val textView: TextView = itemView.findViewById(R.id.textView)

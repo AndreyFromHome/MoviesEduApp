@@ -1,5 +1,6 @@
 package com.example.myapp
 
+import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
@@ -52,8 +53,11 @@ class MoviesActivity : AppCompatActivity() {
                 Log.d("MyLog", "OnFailure ${t?.message} ")
             }
 
-            override fun onItemClick(position: Int) {
-                Toast.makeText(this@MoviesActivity, "click $position", Toast.LENGTH_SHORT).show()
+            override fun onItemClick(char_id: Int) {
+                val intent = Intent(this@MoviesActivity, MovieDetailsActivity::class.java)
+                intent.putExtra("char_id", char_id)
+                startActivity(intent)
+/*                Toast.makeText(this@MoviesActivity, "click $position", Toast.LENGTH_SHORT).show()
                 try {
                     val notify: Uri =
                         RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
@@ -61,7 +65,7 @@ class MoviesActivity : AppCompatActivity() {
                     r.play()
                 } catch (e: Exception) {
                     e.printStackTrace()
-                }
+                }*/
             }
         })
    }
