@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.myapp.data.MoviesItemDetails
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,7 +18,6 @@ class MovieDetailsActivity : AppCompatActivity() {
     private lateinit var overView: TextView
 
     private lateinit var banner: ImageView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

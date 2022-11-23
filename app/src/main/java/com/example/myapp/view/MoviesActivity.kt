@@ -1,20 +1,22 @@
-package com.example.myapp
+package com.example.myapp.view
 
 import android.content.Intent
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapp.*
+import com.example.myapp.data.MoviesItem
+import com.example.myapp.viewmodel.MoviesViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class MoviesActivity : AppCompatActivity() {
+
+    private lateinit var mVievModel : MoviesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,9 @@ class MoviesActivity : AppCompatActivity() {
 
         // ArrayList of class ItemsViewModel
         val data = ArrayList<ItemsViewModel>()
+
+        mVievModel = MoviesViewModel()
+        val result = mVievModel.getMovies()
 
         // This loop will create 20 Views containing
         // the image with the count of view

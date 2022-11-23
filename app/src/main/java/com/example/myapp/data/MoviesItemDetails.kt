@@ -1,4 +1,4 @@
-package com.example.myapp
+package com.example.myapp.data
 
 data class MoviesItemDetails(
     val appearance: List<Int>,

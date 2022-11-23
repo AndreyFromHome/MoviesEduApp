@@ -1,5 +1,7 @@
 package com.example.myapp
 
+import com.example.myapp.data.MoviesItem
+import com.example.myapp.data.MoviesItemDetails
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

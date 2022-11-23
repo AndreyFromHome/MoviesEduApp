@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapp.data.MoviesItem
 import com.squareup.picasso.Picasso
 
 // В адаптере связываем список данных с героями сериала с нашего API и размещаем его в элементе Android Recycler View
