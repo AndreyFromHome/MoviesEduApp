@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.*
 import com.example.myapp.data.MoviesItem
+import com.example.myapp.model.apis.ApiInterface
+import com.example.myapp.view.adapters.CustomAdapter
+import com.example.myapp.viewmodel.ItemsViewModel
 import com.example.myapp.viewmodel.MoviesViewModel
 import retrofit2.Call
 import retrofit2.Callback

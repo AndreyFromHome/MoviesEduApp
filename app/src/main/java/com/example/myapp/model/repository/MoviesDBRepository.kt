@@ -1,4 +1,4 @@
-package com.example.myapp.repository
+package com.example.myapp.model.repository
 
 interface MoviesDBRepository {
 

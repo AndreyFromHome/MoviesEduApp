@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.myapp.data.MoviesItemDetails
+import com.example.myapp.model.apis.ApiInterface
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback

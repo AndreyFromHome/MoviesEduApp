@@ -1,7 +1,7 @@
 package com.example.myapp.viewmodel
 
-import com.example.myapp.repository.MoviesDBRepository
-import com.example.myapp.repository.MoviesDBRepositoryImpl
+import com.example.myapp.model.repository.MoviesDBRepository
+import com.example.myapp.model.repository.MoviesDBRepositoryImpl
 
 class MoviesViewModel {
 

@@ -1,4 +1,4 @@
-package com.example.myapp
+package com.example.myapp.view.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapp.R
 import com.example.myapp.data.MoviesItem
 import com.squareup.picasso.Picasso
 
 // В адаптере связываем список данных с героями сериала с нашего API и размещаем его в элементе Android Recycler View
 class CustomAdapter(private val mList: List<MoviesItem>?,
-                    val mItemClickListener:ItemClickListener) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+                    val mItemClickListener: ItemClickListener
+) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     interface ItemClickListener {
         fun onItemClick(position: Int)

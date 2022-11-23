@@ -1,4 +1,4 @@
-package com.example.myapp
+package com.example.myapp.model.apis
 
 import com.example.myapp.data.MoviesItem
 import com.example.myapp.data.MoviesItemDetails
