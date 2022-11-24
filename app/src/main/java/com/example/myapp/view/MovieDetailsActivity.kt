@@ -1,10 +1,11 @@
-package com.example.myapp
+package com.example.myapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.myapp.R
 import com.example.myapp.data.MoviesItemDetails
 import com.example.myapp.model.apis.ApiInterface
 import com.squareup.picasso.Picasso
