@@ -1,39 +1,52 @@
 package com.example.myapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapp.R
-import com.example.myapp.data.MoviesItemDetails
-import com.example.myapp.model.apis.ApiInterface
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MovieDetailsActivity : AppCompatActivity() {
-    private lateinit var title: TextView
-    private lateinit var releaseDate: TextView
-    private lateinit var score: TextView
-    private lateinit var overView: TextView
+    private lateinit var mTitle: TextView
+    private lateinit var mReleaseDate: TextView
+    private lateinit var mScore: TextView
+    private lateinit var mOverview: TextView
 
-    private lateinit var banner: ImageView
+    private lateinit var mBanner: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_details)
 
         val char_id = intent.getIntExtra("char_id", 0)
-        Log.d("MyLog", "id $char_id")
+        // Log.d("MyLog", "id $char_id")
+        initViews()
+        initObservers()
+        mViewModel.getMovieDetails(char_id)
 
-        title = findViewById(R.id.movies_details_title)
-        releaseDate = findViewById(R.id.movie_details_date)
-        score = findViewById(R.id.movie_details_score)
-        overView = findViewById(R.id.movie_details_body_overview)
-        banner = findViewById(R.id.movie_details_image_banner)
+    }
 
+    private fun setMovieInformation(movieDetails: MovieDetails?) {
+        mTitle.text = movieDetails?.name
+        mReleaseDate = movieDetails?.birthday
+        mScore = movieDetails?.status
+        mOverview = movieDetails?.nickname
+
+        Picasso.get().load(movieDetails.img).into(mBanner)
+    }
+
+    private fun initViews() {
+        mTitle = findViewById(R.id.movies_details_title)
+        mReleaseDate = findViewById(R.id.movie_details_date)
+        mScore = findViewById(R.id.movie_details_score)
+        mOverview = findViewById(R.id.movie_details_body_overview)
+        mBanner = findViewById(R.id.movie_details_image_banner)
+    }
+
+}
+
+/*
         val apiInterface = char_id?.let { ApiInterface.create().getMovieDetails(it) }
         apiInterface?.enqueue( object : Callback<List<MoviesItemDetails>> {
             override fun onResponse(
@@ -57,4 +70,4 @@ class MovieDetailsActivity : AppCompatActivity() {
             }
         })
     }
-}
+}*/

@@ -36,7 +36,7 @@ class MoviesActivity : AppCompatActivity() {
     private fun initObservers() {
         mViewModel.apply {
             movies.observe(this@MoviesActivity) {
-                mMoviesAdapter = customAdapter(it, this@MoviesActivity)
+                mMoviesAdapter = CustomAdapter(it, this@MoviesActivity)
                 mMoviesRecycler.adapter = mMoviesAdapter
             }
         }
