@@ -32,8 +32,8 @@ class CustomAdapter(private val mList: List<MoviesItem>?,
     // Это одна ячейка, которую заполняет адаптер
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val ItemsViewModel = mList?.get(position)
-        Log.d("MyLog", "Текущая позиция ${mList?.get(position)}")
+     //   val ItemsViewModel = mList?.get(position)
+     //   Log.d("MyLog", "Текущая позиция ${mList?.get(position)}")
         Picasso.get().load(mList?.get(position)?.img).into(holder.imageView);
 
     }
@@ -48,12 +48,10 @@ class CustomAdapter(private val mList: List<MoviesItem>?,
         val imageView: ImageView = itemView.findViewById(R.id.imageview)
         init {
             ItemView.setOnClickListener {
-            //    mItemClickListener.onItemClick(adapterPosition)
             // если mList не null, берём позицию на которую кликаем и берём там значение char_id, если здесь везде не null, вызываем let { ... }
-                // в котором вызываем функцию onItemClick(it) в объекте ItemClickListener
-            mList?.get(position)?.char_id?.let { it -> mItemClickListener.onItemClick(it)}
+            // в котором вызываем функцию onItemClick(it) в объекте ItemClickListener
+                mList?.get(position)?.char_id?.let { it -> mItemClickListener.onItemClick(it)}
             }
         }
-        //    val textView: TextView = itemView.findViewById(R.id.textView)
     }
 }

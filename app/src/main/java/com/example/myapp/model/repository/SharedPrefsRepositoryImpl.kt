@@ -2,7 +2,7 @@ package com.example.myapp.model.repository
 
 class SharedPrefsRepositoryImpl : SharedPrefsRepository {
 
-    override fun saveInPrefs(value: String): String {
+    override fun saveInPrefs(value: String) {
         TODO("Not yet implemented")
     }
 
